@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: litecoin
+spec:
+  selector:
+    matchLabels:
+      app: litecoin 
+  serviceName: litecoin
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: litecoin
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+      - name: litecoin
+        # Set never to run in Minikube.
+        # Requires load the minikube Docker daemon
+        imagePullPolicy: Never
+        image: litecoin-kata:1
+        ports:
+        - containerPort: 80
+          name: web
+        resources:
+          requests:
+            cpu: 100m
+            memory: 500Mi
+        volumeMounts:
+        - name: litecoin
+          mountPath: /usr/share/litecoin/data
+  volumeClaimTemplates:
+  - metadata:
+      name: litecoin
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 1Gi
+
