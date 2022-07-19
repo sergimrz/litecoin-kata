@@ -1,0 +1,9 @@
+bases:
+- ../../base
+
+namespace: prod
+
+# Infrastructure as code for the version in production
+images:
+- name: litecoin-kata
+  newTag: "2"

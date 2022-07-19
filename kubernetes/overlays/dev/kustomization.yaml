@@ -1,0 +1,7 @@
+bases:
+  - ../../base
+namespace: dev
+# Infrastructure as code for the version in dev
+images:
+  - name: litecoin-kata
+    newTag: 4-dev

@@ -1,0 +1,4 @@
+ciPipeline(
+  application : "litecoin-kata",
+  runScan     : true
+)

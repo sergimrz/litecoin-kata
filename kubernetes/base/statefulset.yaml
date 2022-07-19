@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: litecoin
+spec:
+  selector:
+    matchLabels:
+      app: litecoin 
+  serviceName: litecoin
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: litecoin
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+      - name: litecoin
+        # Set never to run in Minikube. (otherwise it goes to dockerhub)
+        # Requires load the minikube Docker daemon
+        imagePullPolicy: Never
+        image: litecoin-kata:1
+        ports:
+        - containerPort: 80
+          name: web
+        # Adding resource block. 
+        resources:
+          requests:             # Allocates the resources
+            cpu: 100m
+            memory: 500Mi
+          limit:                # Sets the limits
+            cpu: 150m           # Reach cpu limit will provoke throttles
+            memory: 1Gi         # Reach the memory limit will evict the pod
+          # We are not configuring the liveness and on this exercice
+          # but i'm leaving this block here as it's a good practice define it.
+          #
+          #livenessProbe:
+          #  httpGet:
+          #    path: /health
+          #    port: http
+          #readinessProbe:
+          #  httpGet:
+          #    path: /health
+          #    port: http
+        volumeMounts:
+        - name: litecoin
+          mountPath: /home/litecoin/
+  # volumeClaimTemplate will generate a volume for each pod
+  # of the statefulset
+  volumeClaimTemplates:
+  - metadata:
+      name: litecoin
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 1Gi
+

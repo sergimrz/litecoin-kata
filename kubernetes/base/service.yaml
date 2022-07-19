@@ -1,3 +1,4 @@
+# Required for the stateful sets
 apiVersion: v1
 kind: Service
 metadata:
