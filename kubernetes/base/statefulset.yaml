@@ -28,7 +28,7 @@ spec:
           requests:             # Allocates the resources
             cpu: 100m
             memory: 500Mi
-          limit:                # Sets the limits
+          limits:                # Sets the limits
             cpu: 150m           # Reach cpu limit will provoke throttles
             memory: 1Gi         # Reach the memory limit will evict the pod
           # We are not configuring the liveness and on this exercice
