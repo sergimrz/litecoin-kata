@@ -16,6 +16,7 @@ pipeline {
                 sh "docker build . -t ${imageDev}"
                 sh "curl -s https://ci-tools.anchore.io/inline_scan-v0.6.0 | bash -s -- -r ${imageDev}"
                 // push to registry: docker push ${registry}/${imageDev}
+                sh "minikube image load ${imageDev}"    // local alternative to push to a registry
             }
         }
         // Use kustomize to generate the dev version.
@@ -41,6 +42,8 @@ pipeline {
             steps {
                 sh "docker tag ${imageDev} ${imageProd}"
                 // push to registry: docker push ${registry}/${imageProd}
+                sh "minikube image load ${imageProd}"    // local alternative to push to a registry
+
             }
         }
         // Use kustomize to generate the prod version.
