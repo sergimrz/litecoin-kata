@@ -23,7 +23,7 @@ pipeline {
         // Is not the best idea split the environments just by namespaces.
         stage('Deploy dev image') {
             steps {
-                sh "yq -i '.images[0].newTag = \"${BUILD_NUMBER}-dev\"' kubernetes/overlays/dev/kustomization.yaml"
+                sh "sed -i 's\\newTag.*\\newTag: ${imageDev}\\g' kubernetes/overlays/prod/kustomization.yaml"
                 // Ideally, we should push the file and let argocd or another orchestrator
                 // detect the changes in kubernetes templates and apply it to keep an IAC approach
                 // As we didn't connected the local minikube to the Jenkins so we can't do the apply right now
@@ -46,7 +46,7 @@ pipeline {
         // Use kustomize to generate the prod version.
         stage('Deploy live') {
             steps {
-                sh "yq -i '.images[0].newTag = \"${BUILD_NUMBER}\"' kubernetes/overlays/prod/kustomization.yaml"
+                sh "sed -i 's\\newTag.*\\newTag: ${imageProd}\\g' kubernetes/overlays/prod/kustomization.yaml"
                 // Ideally, we should push the file and let argocd or another orchestrator
                 // detect the changes in kubernetes templates and apply it to keep an IAC approach
                 //sh "kubectl apply -k kubernetes/overlays/prod/"
