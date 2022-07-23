@@ -3,5 +3,5 @@ bases:
 namespace: dev
 # Infrastructure as code for the version in dev
 images:
-  - name: litecoin-kata
-    newTag: 5-dev
+  - name: "litecoin-kata"
+    newTag: "5-dev"
