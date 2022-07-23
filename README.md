@@ -25,3 +25,5 @@ This pipeline perform the following actions:
 * Print a message saying that now comes the step to perform the tests to dev.
 * Promote the image removing a dev identier in the image.
 * Print the kubernetes manifests with the live image applied. Again we don't have the minikube connected so we are not doing the deploy
+
+![Untitled Diagram drawio](https://user-images.githubusercontent.com/18615945/180611849-57f1450e-746f-41cd-9a12-240862ab9f71.png)
