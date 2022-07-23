@@ -6,4 +6,4 @@ namespace: prod
 # Infrastructure as code for the version in production
 images:
 - name: litecoin-kata
-  newTag: r2 
+  newTag: 33
