@@ -20,11 +20,11 @@ Here we started three approaches for build the Jenkinsfile but only developed on
 
 ### Actions
 This pipeline perform the following actions:
-* Build the docker image with a dev version and pass a security scan with Anchore and storing the results in an artifact.
-* If success, print the kubernetes manifests with the new dev image applied. !! We don't have the deploy because we couldn't link the Jenkins server to the local minikube
+* Build the docker image with a dev version and pass a security scan with Anchore and storing the results in an artifact. Push the image to the minikube docker environment.
+* If success, apply the kubernetes manifests in the local minikube using kustomize, in the dev namespace.
 * Print a message saying that now comes the step to perform the tests to dev.
-* Promote the image removing a dev identier in the image.
-* Print the kubernetes manifests with the live image applied. Again we don't have the minikube connected so we are not doing the deploy
+* Promote the image removing a dev identier in the image. Push it to the minikube docker environment.
+* Apply the prod manifests in the minikube cluster with the production image, in the prod namespace.
 
 ![Untitled Diagram drawio](https://user-images.githubusercontent.com/18615945/180611849-57f1450e-746f-41cd-9a12-240862ab9f71.png)
 
