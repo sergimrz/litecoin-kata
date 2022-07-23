@@ -28,7 +28,7 @@ pipeline {
                 // Ideally, we should push the file and let argocd or another orchestrator
                 // detect the changes in kubernetes templates and apply it to keep an IAC approach
                 // As we didn't connected the local minikube to the Jenkins so we can't do the apply right now
-                sh "kubectl kustomize kubernetes/overlays/dev/"
+                sh "kubectl apply -k kubernetes/overlays/dev/ -n dev"
             }
         }
         // Locate here the testing on the image deployed in dev.
@@ -54,7 +54,7 @@ pipeline {
                 // detect the changes in kubernetes templates and apply it to keep an IAC approach
                 //sh "kubectl apply -k kubernetes/overlays/prod/"
                 // As we didn't connected the local minikube to the Jenkins so we can't do the apply right now
-                sh "kubectl kustomize kubernetes/overlays/prod/"
+                sh "kubectl apply -k kubernetes/overlays/prod/ -n prod"
             }
         }
     }
