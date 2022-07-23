@@ -27,3 +27,4 @@ This pipeline perform the following actions:
 * Print the kubernetes manifests with the live image applied. Again we don't have the minikube connected so we are not doing the deploy
 
 ![Untitled Diagram drawio](https://user-images.githubusercontent.com/18615945/180611849-57f1450e-746f-41cd-9a12-240862ab9f71.png)
+![Screenshot from 2022-07-23 17-33-56](https://user-images.githubusercontent.com/18615945/180611922-8665759d-213d-4d82-a5cb-73a9b1cad71b.png)
